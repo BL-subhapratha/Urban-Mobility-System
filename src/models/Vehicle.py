@@ -14,11 +14,15 @@ class Vehicle(ABC):
     def get_maintenance_status(self):
         return self.__maintenance_status
     
+    @property
+    def battery_percentage(self):
+        return self._battery_percentage
+    
     @battery_percentage.setter
     def battery_percentage(self, value):
-        if not (0 < value < 100):
+        if not (0 <= value <= 100):
             print("Battery percentage must be between 0 and 100.")
-        self.battery_percentage = value
+        self._battery_percentage = value
 
     #UC4: Abstraction
     @abstractmethod
@@ -31,8 +35,9 @@ class ElectricCar (Vehicle):
         super().__init__(vehicle_id, model, battery_percentage)
         self.seating_capacity = seating_capacity
 
+    #UC5: Polymorphism
     def calculate_trip_cost(self, distance):
-        pass
+        return f"$"+ str(5.00 + (0.50 * distance))
     
     
 class ElectricScooter(Vehicle):
@@ -40,5 +45,6 @@ class ElectricScooter(Vehicle):
         super().__init__(vehicle_id, model, battery_percentage)
         self.max_speed_limit = max_speed_limit
 
-    def calculate_trip_cost(self, distance):
-        pass
+    #UC5: Polymorphism
+    def calculate_trip_cost(self, time):
+        return f"$"+ str(1.00 + (0.15 * time))
