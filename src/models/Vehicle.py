@@ -7,11 +7,11 @@ class Vehicle(ABC):
         self.model = model
         self.battery_percentage = battery_percentage
         #UC2: private attribute
-        self.__maintenance_status = ''
+        self.__maintenance_status = 'Available'
 
     #UC2: getters and setters
     @property
-    def get_maintenance_status(self):
+    def maintenance_status(self):
         return self.__maintenance_status
     
     @property
@@ -21,8 +21,19 @@ class Vehicle(ABC):
     @battery_percentage.setter
     def battery_percentage(self, value):
         if not (0 <= value <= 100):
-            print("Battery percentage must be between 0 and 100.")
+            raise ValueError("Battery percentage must be between 0 and 100.")
         self._battery_percentage = value
+
+    @maintenance_status.setter
+    def maintenance_status(self, status):
+        allowed_status = {"Available", "On Trip", "Under Maintenance"}
+
+        if status not in allowed_status:
+            raise ValueError("Invalid maintenance status!")
+        self.__maintenance_status = status
+
+    def __str__(self):
+        return f"ID: {self.vehicle_id} \nModel: {self.model} \nBattery Percentage: {self.battery_percentage} \nMaintenance Status: {self.__maintenance_status}"
 
     #UC4: Abstraction
     @abstractmethod
@@ -37,7 +48,10 @@ class ElectricCar (Vehicle):
 
     #UC5: Polymorphism
     def calculate_trip_cost(self, distance):
-        return f"$"+ str(5.00 + (0.50 * distance))
+        return 5.00 + (0.50 * distance)
+    
+    def __str__(self):
+        return super().__str__() + f"\nSeating Capacity: {self.seating_capacity} \nVehicle Type: Electric Car"
     
     
 class ElectricScooter(Vehicle):
@@ -47,4 +61,7 @@ class ElectricScooter(Vehicle):
 
     #UC5: Polymorphism
     def calculate_trip_cost(self, time):
-        return f"$"+ str(1.00 + (0.15 * time))
+        return 1.00 + (0.15 * time)
+    
+    def __str__(self):
+        return super().__str__() + f"\nMax Speed Limit: {self.max_speed_limit} \nVehicle Type: Electric Scooter"
