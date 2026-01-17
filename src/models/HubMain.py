@@ -2,7 +2,6 @@ from .Hub import Hub
 
 #UC6: Multiple hubs
 def createHubs(hubs):
-    
     hub_name = input("\nEnter Hub name: ")
 
     if hub_name in hubs:
