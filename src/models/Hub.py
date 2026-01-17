@@ -20,11 +20,21 @@ class Hub:
             if(vehiclechoice == 1):
                 newseating = int(input(f"{i+1} Seating Capacity: "))
                 newElectricCar = ElectricCar(newvehicleid, newmodel, newbatteryper, newseating)
-                self.vehicles.append(newElectricCar)
+                
+                #UC7: Check for duplicate vehicles
+                if newElectricCar in self.vehicles:
+                    print("\nVehicle ID already exists!")
+                else:
+                    self.vehicles.append(newElectricCar)
             elif vehiclechoice == 2:
                 newspeedlimit = int(input(f"{i+1} Max Speed Limit: "))
                 newElectricScooter = ElectricScooter(newvehicleid, newmodel, newbatteryper, newspeedlimit)
-                self.vehicles.append(newElectricScooter)
+                
+                #UC7: Check for duplicate vehicles
+                if newElectricScooter in self.vehicles:
+                    print("\nVehicle ID already exists!")
+                else:
+                    self.vehicles.append(newElectricScooter)
             else:
                 print("Invalid choice!")
 

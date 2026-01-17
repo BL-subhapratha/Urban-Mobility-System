@@ -34,7 +34,13 @@ class Vehicle(ABC):
 
     def __str__(self):
         return f"ID: {self.vehicle_id} \nModel: {self.model} \nBattery Percentage: {self.battery_percentage} \nMaintenance Status: {self.__maintenance_status}"
-
+    
+    #UC7: No duplicate Vehicle IDs
+    def __eq__(self, other):
+        if not isinstance(other, Vehicle):
+            return False
+        return self.vehicle_id == other.vehicle_id
+    
     #UC4: Abstraction
     @abstractmethod
     def calculate_trip_cost(self, distance):
