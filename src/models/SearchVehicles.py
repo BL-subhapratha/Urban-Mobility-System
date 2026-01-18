@@ -36,3 +36,14 @@ class SearchVehicle:
             print("Scooters:")
             for s in scooters:
                 print(s)
+
+    #UC10: count of vehicles by status
+    def count_by_status(self):
+        for hub in self.hubs.values():
+            available_vehicles = [v for v in hub.vehicles if v.maintenance_status == 'Available']
+            onTrip_vehicles = [v for v in hub.vehicles if v.maintenance_status == 'On Trip']
+            underMaintenance_vehicles = [v for v in hub.vehicles if v.maintenance_status == 'Under Maintenance']
+
+        print(f"Count of Available vehicles: {len(available_vehicles)}")
+        print(f"Count of On Trip vehicles: {len(onTrip_vehicles)}")
+        print(f"Count of Under Maintenance vehicles: {len(underMaintenance_vehicles)}")

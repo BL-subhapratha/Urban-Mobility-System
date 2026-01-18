@@ -15,7 +15,7 @@ print("Total trip cost in scooter is", vehicleScooter.calculate_trip_cost(30))
 hubs = {}
 
 while True:
-    choice = int(input("\nEnter: \n1. Add new hub \n2. Add Vehicles to existing hub \n3. Display hubs \n4. Search vehicles \n5. Categorized View \n6. Exit\n"))
+    choice = int(input("\nEnter: \n1. Add new hub \n2. Add Vehicles to existing hub \n3. Display hubs \n4. Search vehicles \n5. Categorized View \n6. Get count of vehicles by status \n7. Exit\n"))
 
     if choice == 1:
         createHubs(hubs)
@@ -36,7 +36,10 @@ while True:
     elif choice == 5:
         searchView = SearchVehicle(hubs)
         searchView.categorized_view()
-    elif choice == 6: 
+    elif choice == 6:
+        searchCount = SearchVehicle(hubs)
+        searchCount.count_by_status()
+    elif choice == 7: 
         break
     else:
         print("Invalid choice!")
